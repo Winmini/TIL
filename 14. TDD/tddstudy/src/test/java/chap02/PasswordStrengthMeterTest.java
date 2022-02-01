@@ -30,6 +30,11 @@ public class PasswordStrengthMeterTest {
 	}
 
 	@Test
+	void meterUppercaseNormalTest() {
+		assertStrength("ab12!@df", PasswordStrength.NORMAL);
+	}
+
+	@Test
 	void validateNullInput() {
 		assertStrength(null, PasswordStrength.INVALID);
 	}

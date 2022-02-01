@@ -10,7 +10,7 @@ public class PasswordStrengthMeter {
 	public PasswordStrength meter(String password) {
 		if (password == null || password.isEmpty())
 			return PasswordStrength.INVALID;
-		if (meterPasswordLength(password) || meterContainingNumber(password))
+		if (meterPasswordLength(password) || meterContainingNumber(password) || meterUppercase(password))
 			return PasswordStrength.NORMAL;
 		return PasswordStrength.STRONG;
 	}
@@ -23,5 +23,9 @@ public class PasswordStrengthMeter {
 
 	private boolean meterContainingNumber(String password) {
 		return password.matches(CONTAINING_NUMBER_REGEX);
+	}
+
+	private boolean meterUppercase(String password) {
+		return password.toLowerCase().equals(password);
 	}
 }
