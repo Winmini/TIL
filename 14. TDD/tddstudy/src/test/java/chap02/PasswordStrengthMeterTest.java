@@ -28,4 +28,9 @@ public class PasswordStrengthMeterTest {
 	void meterNumberNormalTest() {
 		assertStrength("ab!@!bqw@A", PasswordStrength.NORMAL);
 	}
+
+	@Test
+	void validateNullInput() {
+		assertStrength(null, PasswordStrength.INVALID);
+	}
 }
