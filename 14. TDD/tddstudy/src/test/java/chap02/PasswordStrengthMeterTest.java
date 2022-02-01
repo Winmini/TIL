@@ -35,6 +35,11 @@ public class PasswordStrengthMeterTest {
 	}
 
 	@Test
+	void meterLengthWeekTest() {
+		assertStrength("password", PasswordStrength.WEEK);
+	}
+
+	@Test
 	void validateNullInput() {
 		assertStrength(null, PasswordStrength.INVALID);
 	}

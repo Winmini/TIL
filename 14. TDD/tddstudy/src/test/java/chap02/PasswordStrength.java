@@ -1,7 +1,7 @@
 package chap02;
 
 public enum PasswordStrength {
-	STRONG("강함"), NORMAL("보통"), INVALID("유효하지 않음"), WEEK("약함");
+	STRONG("강함"), NORMAL("보통"), WEEK("약함"), INVALID("유효하지 않음");
 
 	private final String passwordStrength;
 
