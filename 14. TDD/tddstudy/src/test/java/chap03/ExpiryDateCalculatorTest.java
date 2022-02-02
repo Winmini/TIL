@@ -42,6 +42,16 @@ public class ExpiryDateCalculatorTest {
 				.Builder(LocalDate.of(2019, 5, 31), 10_000)
 				.build(),
 			LocalDate.of(2019, 6, 30));
+	}
+
+	@Test
+	void 첫_납부일과_만료일_일자가_다른_경우() {
+		assertExpiryDate(
+			new PayData
+				.Builder(LocalDate.of(2019, 1, 31), 10_000)
+				.billingDate(LocalDate.of(2019, 2, 28))
+				.build(),
+			LocalDate.of(2019, 3, 31));
 
 	}
 
