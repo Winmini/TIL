@@ -15,6 +15,9 @@ public class PasswordStrengthMeter {
 		if (!isEnoughLength(password) && hasNumber(password) && isLowercase(password))
 			return PasswordStrength.WEEK;
 
+		if (!isEnoughLength(password) && !hasNumber(password) && !isLowercase(password))
+			return PasswordStrength.WEEK;
+
 		if (!isEnoughLength(password) || !hasNumber(password) || isLowercase(password))
 			return PasswordStrength.NORMAL;
 		return PasswordStrength.STRONG;
