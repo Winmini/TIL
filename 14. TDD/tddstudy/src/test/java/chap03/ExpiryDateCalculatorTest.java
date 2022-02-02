@@ -53,6 +53,20 @@ public class ExpiryDateCalculatorTest {
 				.build(),
 			LocalDate.of(2019, 3, 31));
 
+		assertExpiryDate(
+			new PayData
+				.Builder(LocalDate.of(2019, 5, 31), 10_000)
+				.billingDate(LocalDate.of(2019, 6, 30))
+				.build(),
+			LocalDate.of(2019, 7, 31));
 	}
 
+	@Test
+	void 만원을_초과하여_납부하는_경우() {
+		assertExpiryDate(
+			new PayData
+				.Builder(LocalDate.of(2019, 1, 31), 20_000)
+				.build(),
+			LocalDate.of(2019, 3, 31));
+	}
 }
