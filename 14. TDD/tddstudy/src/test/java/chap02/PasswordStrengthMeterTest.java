@@ -50,6 +50,11 @@ public class PasswordStrengthMeterTest {
 	}
 
 	@Test
+	void meterTheOtherCase() {
+		assertStrength("abc", PasswordStrength.WEEK);
+	}
+
+	@Test
 	void validateNullInput() {
 		assertStrength(null, PasswordStrength.INVALID);
 	}

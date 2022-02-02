@@ -34,7 +34,7 @@ public class PasswordStrengthMeter {
 	}
 
 	private PasswordStrength evaluate(int passwordStrength) {
-		if (passwordStrength == 1)
+		if (passwordStrength <= 1)
 			return PasswordStrength.WEEK;
 		if (passwordStrength == 2)
 			return PasswordStrength.NORMAL;
