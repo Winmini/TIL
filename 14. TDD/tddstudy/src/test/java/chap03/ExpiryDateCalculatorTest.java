@@ -29,4 +29,5 @@ public class ExpiryDateCalculatorTest {
 		assertExpiryDate(LocalDate.of(2019, 5, 31), 10_000,
 			LocalDate.of(2019, 6, 30));
 	}
+
 }
