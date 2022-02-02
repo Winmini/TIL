@@ -9,6 +9,11 @@ public class PasswordStrengthMeter {
 		if (password == null || password.isEmpty())
 			return PasswordStrength.INVALID;
 
+		int passwordStrength = meterPasswordStrength(password);
+		return evaluate(passwordStrength);
+	}
+
+	private int meterPasswordStrength(String password) {
 		int passwordStrength = 0;
 
 		if (isEnoughLength(password))
@@ -18,7 +23,7 @@ public class PasswordStrengthMeter {
 		if (!isLowercase(password))
 			passwordStrength += 1;
 
-		return evaluate(passwordStrength);
+		return passwordStrength;
 	}
 
 	private boolean isEnoughLength(String password) {
