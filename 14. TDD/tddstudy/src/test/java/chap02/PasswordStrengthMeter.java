@@ -9,21 +9,17 @@ public class PasswordStrengthMeter {
 		if (password == null || password.isEmpty())
 			return PasswordStrength.INVALID;
 
-		if (isEnoughLength(password) && !hasNumber(password) && isLowercase(password))
-			return PasswordStrength.WEEK;
+		int passwordStrength = 0;
 
-		if (!isEnoughLength(password) && hasNumber(password) && isLowercase(password))
-			return PasswordStrength.WEEK;
+		if (isEnoughLength(password))
+			passwordStrength += 1;
+		if (hasNumber(password))
+			passwordStrength += 1;
+		if (!isLowercase(password))
+			passwordStrength += 1;
 
-		if (!isEnoughLength(password) && !hasNumber(password) && !isLowercase(password))
-			return PasswordStrength.WEEK;
-
-		if (!isEnoughLength(password) || !hasNumber(password) || isLowercase(password))
-			return PasswordStrength.NORMAL;
-		return PasswordStrength.STRONG;
+		return evaluate(passwordStrength);
 	}
-
-	// private boolean
 
 	private boolean isEnoughLength(String password) {
 		return password.length() >= PASSWORD_LENGTH_STANDARD;
@@ -35,5 +31,13 @@ public class PasswordStrengthMeter {
 
 	private boolean isLowercase(String password) {
 		return password.toLowerCase().equals(password);
+	}
+
+	private PasswordStrength evaluate(int passwordStrength) {
+		if (passwordStrength == 1)
+			return PasswordStrength.WEEK;
+		if (passwordStrength == 2)
+			return PasswordStrength.NORMAL;
+		return PasswordStrength.STRONG;
 	}
 }
