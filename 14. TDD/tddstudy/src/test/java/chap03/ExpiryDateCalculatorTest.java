@@ -93,5 +93,18 @@ public class ExpiryDateCalculatorTest {
 				.Builder(LocalDate.of(2019, 1, 31), 100_000)
 				.build(),
 			LocalDate.of(2020, 1, 31));
+
+		assertExpiryDate(
+			new PayData
+				.Builder(LocalDate.of(2019, 1, 31), 130_000)
+				.build(),
+			LocalDate.of(2020, 4, 30));
+
+		assertExpiryDate(
+			new PayData
+				.Builder(LocalDate.of(2019, 1, 31), 130_000)
+				.billingDate(LocalDate.of(2019,2, 28))
+				.build(),
+			LocalDate.of(2020, 5, 31));
 	}
 }
