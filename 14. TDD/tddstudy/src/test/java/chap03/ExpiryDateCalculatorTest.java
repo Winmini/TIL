@@ -62,11 +62,27 @@ public class ExpiryDateCalculatorTest {
 	}
 
 	@Test
-	void 만원을_초과하여_납부하는_경우() {
+	void 만원을_초과하여_납부() {
 		assertExpiryDate(
 			new PayData
 				.Builder(LocalDate.of(2019, 1, 31), 20_000)
 				.build(),
 			LocalDate.of(2019, 3, 31));
+
+		assertExpiryDate(
+			new PayData
+				.Builder(LocalDate.of(2019, 3, 11), 30_000)
+				.build(),
+			LocalDate.of(2019, 6, 11));
+	}
+
+	@Test
+	void 첫_납부일과_만료일_일자가_다를_때_만원을_초과하여_납부() {
+		assertExpiryDate(
+			new PayData
+				.Builder(LocalDate.of(2019, 1, 31), 20_000)
+				.billingDate(LocalDate.of(2019, 2, 28))
+				.build(),
+			LocalDate.of(2019, 4, 30));
 	}
 }

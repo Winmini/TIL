@@ -1,6 +1,7 @@
 package chap03;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 
 public class ExpiryDateCalculator {
 
@@ -8,16 +9,19 @@ public class ExpiryDateCalculator {
 
 	public LocalDate calculateExpiryDate(PayData payData) {
 		int addedMonths = calculateAddedMonth(payData);
+		LocalDate firstBillingDate = payData.getFirstBillingDate();
+		LocalDate billingDate = payData.getBillingDate();
 
-		if (payData.getFirstBillingDate().equals(payData.getBillingDate()))
-			return payData.getBillingDate().plusMonths(addedMonths);
+		if (firstBillingDate.equals(billingDate))
+			return billingDate.plusMonths(addedMonths);
 
-		return payData.getBillingDate()
+		return billingDate
 			.plusMonths(addedMonths)
-			.withDayOfMonth(payData.getFirstBillingDate().getDayOfMonth());
+			.withDayOfMonth(Math.min(firstBillingDate.getDayOfMonth(),
+				YearMonth.from(billingDate.plusMonths(addedMonths)).lengthOfMonth()));
 	}
 
-	private int calculateAddedMonth(PayData payData){
+	private int calculateAddedMonth(PayData payData) {
 		return payData.getPayAmount() / MONTHLY_FEE;
 	}
 }
