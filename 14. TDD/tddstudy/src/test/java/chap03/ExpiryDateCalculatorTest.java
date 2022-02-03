@@ -85,4 +85,13 @@ public class ExpiryDateCalculatorTest {
 				.build(),
 			LocalDate.of(2019, 4, 30));
 	}
+
+	@Test
+	void 십만원을_납부하면_1년_제공() {
+		assertExpiryDate(
+			new PayData
+				.Builder(LocalDate.of(2019, 1, 31), 100_000)
+				.build(),
+			LocalDate.of(2020, 1, 31));
+	}
 }
