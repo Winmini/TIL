@@ -29,8 +29,10 @@ public class UserRegisterTest {
 	@DisplayName("중복된 ID면 가입 실패")
 	@Test
 	void duplicatedId() {
+		fakeRepository.save(new User.Builder("id", "pw", "email").build());
 		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
 			userRegister.register("id", "pw", "email");
 		});
+		assertTrue(thrown.getMessage().contains("[ERROR]"));
 	}
 }

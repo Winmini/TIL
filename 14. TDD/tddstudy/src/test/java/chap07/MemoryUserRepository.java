@@ -10,4 +10,9 @@ public class MemoryUserRepository implements UserRepository {
 	public void save(User user) {
 		users.put(user.getId(), user);
 	}
+
+	@Override
+	public boolean checkDuplicatedId(String id) {
+		return users.containsKey(id);
+	}
 }
