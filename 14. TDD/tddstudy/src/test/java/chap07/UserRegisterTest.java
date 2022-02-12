@@ -20,6 +20,16 @@ public class UserRegisterTest {
 		userRegister = new UserRegister(mockPasswordChecker, fakeRepository, mockEmailNotifier);
 	}
 
+	@DisplayName("회원 가입시 암호 검사 수행함")
+	@Test
+	void checkPassword() {
+		userRegister.register("id", "pw", "email");
+
+		BDDMockito.then(mockPasswordChecker)
+			.should()
+			.checkPasswordWeak(BDDMockito.anyString());
+	}
+
 	@DisplayName("약한 암호면 가입 실패")
 	@Test
 	void weakPassword() {
