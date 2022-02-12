@@ -69,9 +69,4 @@ public class UserRegisterTest {
 		String realEmail = captor.getValue();
 		assertEquals("email", realEmail);
 	}
-
-	@Test
-	void mockTest() {
-		SpyEmailNotifier spyEmailNotifier = Mockito.mock(SpyEmailNotifier.class);
-	}
 }
