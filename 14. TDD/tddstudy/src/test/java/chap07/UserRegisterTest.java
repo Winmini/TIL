@@ -9,11 +9,12 @@ import org.junit.jupiter.api.Test;
 public class UserRegisterTest {
 	private UserRegister userRegister;
 	private final StubWeakPasswordChecker stubPasswordChecker = new StubWeakPasswordChecker();
-	private final UserRepository fakeRepository = new MemoryUserRepository();
+	private final MemoryUserRepository fakeRepository = new MemoryUserRepository();
+	private final SpyEmailNotifier spyEmailNotifier = new SpyEmailNotifier();
 
 	@BeforeEach
 	void setUp() {
-		userRegister = new UserRegister(stubPasswordChecker, fakeRepository);
+		userRegister = new UserRegister(stubPasswordChecker, fakeRepository, spyEmailNotifier);
 	}
 
 	@DisplayName("약한 암호면 가입 실패")
@@ -41,5 +42,13 @@ public class UserRegisterTest {
 	void successRegister() {
 		userRegister.register("id", "pw", "email");
 		assertTrue(fakeRepository.checkDuplicatedId("id"));
+	}
+
+	@DisplayName("가입하면 메일을 전송함")
+	@Test
+	void sendMailWhenRegister() {
+		userRegister.register("id", "pw", "email");
+		assertTrue(spyEmailNotifier.isCalled());
+		assertEquals("email", spyEmailNotifier.getEmail());
 	}
 }
