@@ -4,7 +4,7 @@ public class UserRegister {
 	private final WeakPasswordChecker passwordChecker;
 	private final UserRepository userRepository;
 
-	public UserRegister(WeakPasswordChecker passwordChecker, MemoryUserRepository userRepository) {
+	public UserRegister(WeakPasswordChecker passwordChecker, UserRepository userRepository) {
 		this.passwordChecker = passwordChecker;
 		this.userRepository = userRepository;
 	}
@@ -16,6 +16,6 @@ public class UserRegister {
 		if (userRepository.checkDuplicatedId(id)) {
 			throw new IllegalArgumentException("[ERROR] 중복된 아이디 입니다.");
 		}
-
+		userRepository.save(new User.Builder(id, pw, email).build());
 	}
 }

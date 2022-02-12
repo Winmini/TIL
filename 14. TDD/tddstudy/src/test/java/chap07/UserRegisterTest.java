@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class UserRegisterTest {
 	private UserRegister userRegister;
 	private final StubWeakPasswordChecker stubPasswordChecker = new StubWeakPasswordChecker();
-	private final MemoryUserRepository fakeRepository = new MemoryUserRepository();
+	private final UserRepository fakeRepository = new MemoryUserRepository();
 
 	@BeforeEach
 	void setUp() {
@@ -34,5 +34,12 @@ public class UserRegisterTest {
 			userRegister.register("id", "pw", "email");
 		});
 		assertTrue(thrown.getMessage().contains("[ERROR]"));
+	}
+
+	@DisplayName("같은 ID가 없으면 가입 성공")
+	@Test
+	void successRegister() {
+		userRegister.register("id", "pw", "email");
+		assertTrue(fakeRepository.checkDuplicatedId("id"));
 	}
 }
