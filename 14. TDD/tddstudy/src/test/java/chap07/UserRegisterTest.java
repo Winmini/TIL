@@ -9,18 +9,27 @@ import org.junit.jupiter.api.Test;
 public class UserRegisterTest {
 	private UserRegister userRegister;
 	private final StubWeakPasswordChecker stubPasswordChecker = new StubWeakPasswordChecker();
+	private final MemoryUserRepository fakeRepository = new MemoryUserRepository();
 
 	@BeforeEach
 	void setUp() {
-		userRegister = new UserRegister(stubPasswordChecker);
+		userRegister = new UserRegister(stubPasswordChecker, fakeRepository);
 	}
 
 	@DisplayName("약한 암호면 가입 실패")
 	@Test
 	void weakPassword() {
 		stubPasswordChecker.setWeak(true);
+		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
+			userRegister.register("id", "pw", "email");
+		});
+		assertTrue(thrown.getMessage().contains("[ERROR]"));
+	}
 
-		assertThrows(WeakPasswordException.class, () -> {
+	@DisplayName("중복된 ID면 가입 실패")
+	@Test
+	void duplicatedId() {
+		IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () -> {
 			userRegister.register("id", "pw", "email");
 		});
 	}
