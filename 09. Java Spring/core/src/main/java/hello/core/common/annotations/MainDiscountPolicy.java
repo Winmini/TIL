@@ -1,4 +1,4 @@
-package hello.core.annotations;
+package hello.core.common.annotations;
 
 	import java.lang.annotation.Documented;
 	import java.lang.annotation.ElementType;
