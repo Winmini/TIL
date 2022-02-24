@@ -5,7 +5,7 @@
 ### REST의 구성
 
 - 자원(RESOURCE) - URI
-- 행위(Verb) - HTTP METHOD
+- 행위(Verb) - HTTP METHOD (POST, GET, PUT, DELETE, PATCH)
 - 표현(Represntations)
 
 

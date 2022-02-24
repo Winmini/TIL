@@ -21,7 +21,7 @@
 
 
 
-API 설계 - PUT 기반 등록
+**API 설계 - PUT 기반 등록**
 
 - GET: 파일 목록 /files
 - GET: 파일 조회 /files/{filename}
