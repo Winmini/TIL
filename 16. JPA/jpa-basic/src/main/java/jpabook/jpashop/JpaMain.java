@@ -1,6 +1,4 @@
-package com.hellojpa;
-
-import java.util.List;
+package jpabook.jpashop;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,20 +7,14 @@ import javax.persistence.Persistence;
 
 public class JpaMain {
 	public static void main(String[] args) {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpashop");
 		EntityManager em = emf.createEntityManager();
-
 		EntityTransaction tx = em.getTransaction();
-
 		tx.begin();
-		try {
-			List<Member> result = em.createQuery("select m from Member as m", Member.class)
-				.setFirstResult(5)
-				.setMaxResults(8)
-				.getResultList();
 
+		try {
 			tx.commit();
-		} catch (Exception e) {
+		} catch (Exception e){
 			tx.rollback();
 		} finally {
 			em.close();
