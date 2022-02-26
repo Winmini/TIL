@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Member {
@@ -15,6 +17,11 @@ public class Member {
 	@Id @GeneratedValue
 	@Column(name = "MEMBER_ID")
 	private Long id;
+
+	@ManyToOne
+	@JoinColumn(name = "TEAM_ID")
+	private Team team;
+
 	private String name;
 	private String city;
 	private String street;
