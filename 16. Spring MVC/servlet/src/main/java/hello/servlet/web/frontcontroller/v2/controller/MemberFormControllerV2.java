@@ -15,6 +15,6 @@ public class MemberFormControllerV2 implements ControllerV2 {
 		ServletException,
 		IOException {
 
-		return new MyView("/WEB-INF/views/new-form.jsp/");
+		return new MyView("/WEB-INF/views/new-form.jsp");
 	}
 }
