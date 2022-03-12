@@ -1,4 +1,4 @@
-# Error executing DDL
+# DB 테이블 생성시, like는 불가능하다.
 
 
 
