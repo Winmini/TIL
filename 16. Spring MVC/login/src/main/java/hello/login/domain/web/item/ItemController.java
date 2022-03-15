@@ -1,9 +1,9 @@
-package hello.login.web.item;
+package hello.login.domain.web.item;
 
 import hello.login.domain.item.Item;
 import hello.login.domain.item.ItemRepository;
-import hello.login.web.item.form.ItemSaveForm;
-import hello.login.web.item.form.ItemUpdateForm;
+import hello.login.domain.web.item.form.ItemSaveForm;
+import hello.login.domain.web.item.form.ItemUpdateForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
