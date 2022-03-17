@@ -81,7 +81,7 @@ public class HomeController {
         if (loginMember == null) {
             return "home";
         }
-        //로그인
+
         model.addAttribute("member", loginMember);
         return "loginHome";
     }
