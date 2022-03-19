@@ -1,4 +1,4 @@
-package hello.login.domain.web.session;
+package hello.login.web.session;
 
 import java.util.Arrays;
 import java.util.Map;

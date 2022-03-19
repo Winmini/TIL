@@ -1,4 +1,4 @@
-package hello.login.domain.web.session;
+package hello.login.web.session;
 
 public interface SessionConst {
 	String LOGIN_MEMBER = "loginMember";

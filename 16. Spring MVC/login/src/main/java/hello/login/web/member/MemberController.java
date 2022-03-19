@@ -1,4 +1,4 @@
-package hello.login.domain.web.member;
+package hello.login.web.member;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;

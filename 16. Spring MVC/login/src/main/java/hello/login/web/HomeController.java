@@ -1,6 +1,4 @@
-package hello.login.domain.web;
-
-import static hello.login.domain.web.session.SessionConst.*;
+package hello.login.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,8 +11,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import hello.login.domain.member.Member;
 import hello.login.domain.member.MemberRepository;
-import hello.login.domain.web.session.SessionConst;
-import hello.login.domain.web.session.SessionManager;
+import hello.login.web.session.SessionConst;
+import hello.login.web.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -65,7 +63,7 @@ public class HomeController {
             return "home";
         }
 
-        Member loginMember = (Member)session.getAttribute(LOGIN_MEMBER);
+        Member loginMember = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER);
 
         if (loginMember == null) {
             return "home";
@@ -76,7 +74,7 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String homeLoginV3Spring(@SessionAttribute(name = LOGIN_MEMBER, required = false) Member loginMember, Model model) {
+    public String homeLoginV3Spring(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember, Model model) {
 
         if (loginMember == null) {
             return "home";

@@ -1,4 +1,4 @@
-package hello.login.domain.web.login;
+package hello.login.web.login;
 
 import javax.validation.constraints.NotEmpty;
 
