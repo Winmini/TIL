@@ -22,11 +22,6 @@ import hello.login.web.interceptor.LoginCheckInterceptor;
 public class WebConfig implements WebMvcConfigurer {
 
 	@Override
-	public Validator getValidator() {
-		return WebMvcConfigurer.super.getValidator();
-	}
-
-	@Override
 	public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
 		resolvers.add(new LoginMemberArgumentResolver());
 	}
