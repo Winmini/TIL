@@ -1,5 +1,7 @@
 package jpabook.jpashop.domain;
 
+import static javax.persistence.InheritanceType.*;
+
 import javax.naming.ldap.PagedResultsControl;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -11,7 +13,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = JOINED)
 @DiscriminatorColumn
 public abstract class Item extends BaseEntity{
 
