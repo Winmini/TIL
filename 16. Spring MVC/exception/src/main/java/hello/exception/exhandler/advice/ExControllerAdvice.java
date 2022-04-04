@@ -35,5 +35,5 @@ public class ExControllerAdvice {
 		log.error("e", e);
 		return new ErrorResult("BAD", e.getMessage());
 	}
- 
+
 }

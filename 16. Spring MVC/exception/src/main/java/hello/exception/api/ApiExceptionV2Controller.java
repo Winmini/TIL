@@ -19,8 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 public class ApiExceptionV2Controller {
 
 
-
-
 	@GetMapping("/api2/members/{id}")
 	public ApiExceptionController.MemberDto getMember(@PathVariable("id") String id) {
 
