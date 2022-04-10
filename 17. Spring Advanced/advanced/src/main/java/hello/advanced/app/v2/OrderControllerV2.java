@@ -11,8 +11,10 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class OrderControllerV2 {
+
 	private final OrderServiceV2 orderService;
 	private final LogTrace trace;
+
 	@GetMapping("/v2/request")
 	public String request(String itemId) {
 		TraceStatus status = null;
