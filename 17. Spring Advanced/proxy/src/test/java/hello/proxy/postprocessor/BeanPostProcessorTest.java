@@ -1,2 +1,4 @@
-package hello.proxy.postprocessor;public class BeanPostProcessorTest {
+package hello.proxy.postprocessor;
+
+public class BeanPostProcessorTest {
 }
