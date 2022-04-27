@@ -1,5 +1,6 @@
 package com.ssafy.ws.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -24,5 +25,10 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public int save(Book book) {
 		return bookMapper.save(book);
+	}
+
+	@Override
+	public List<Book> findAll() {
+		return bookMapper.findAll();
 	}
 }

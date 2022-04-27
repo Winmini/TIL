@@ -3,14 +3,12 @@ spring:
     basename: errors
 
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/ssafyweb?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
+    jdbc-url: jdbc:mysql://127.0.0.1:3306/ssafyweb?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
     username: ssafy
     password: ssafy
     driver-class-name: com.mysql.cj.jdbc.Driver
+    mapper-locations: mapper/BookMapper.xml
 
-  mybatis:
-    type-aliases-package: com.example.myproject.mapper
-    mapper-locations: mybatis/mapper/**/*.xml
 
   data:
     web:
@@ -24,3 +22,7 @@ logging.level:
 server.servlet.session:
   tracking-modes: cookie
   timeout: 1800
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

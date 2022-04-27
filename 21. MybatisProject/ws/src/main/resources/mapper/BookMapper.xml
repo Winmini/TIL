@@ -8,4 +8,9 @@
         FROM book
         WHERE id = #{id}
     </select>
+
+    <select id="findAll" resultType="com.ssafy.ws.domain.Book">
+        SELECT *
+        FROM book
+    </select>
 </mapper>
