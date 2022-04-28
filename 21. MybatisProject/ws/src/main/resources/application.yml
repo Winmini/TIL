@@ -9,12 +9,15 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     mapper-locations: mapper/BookMapper.xml
 
-
   data:
     web:
       pageable:
         default-page-size: 10
         max-page-size: 50
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
 
 logging.level:
   org.hibernate.SQL: debug

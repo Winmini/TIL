@@ -1,4 +1,4 @@
-package com.ssafy.ws;
+package com.ssafy.ws.config;
 
 import javax.sql.DataSource;
 
