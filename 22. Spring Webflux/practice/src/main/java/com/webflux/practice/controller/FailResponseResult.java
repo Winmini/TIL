@@ -1,2 +1,4 @@
-package com.webflux.practice.controller;public class FailResponseResult {
+package com.webflux.practice.controller;
+
+public class FailResponseResult {
 }
