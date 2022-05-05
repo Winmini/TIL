@@ -12,6 +12,7 @@ public class SwaggerAdvice implements MethodInterceptor {
 	@ApiOperation(value = "")
 	public Object invoke(MethodInvocation invocation) throws Throwable {
 		try {
+			invocation.proceed();
 			return invocation.proceed();
 		} catch (Exception e) {
 			throw e;

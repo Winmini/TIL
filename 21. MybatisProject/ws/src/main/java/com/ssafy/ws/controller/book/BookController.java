@@ -20,14 +20,12 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/book")
 @RequiredArgsConstructor
-//@Api(value = "SSAFY")
 public class BookController {
 
 	private final BookService bookService;
 
 	@GetMapping
-	@ApiOperation(value = "책 조회")
-	public SuccessResponseResult getBooks() {
+	public SuccessResponseResult getBooksWithSwagger() {
 		List<Book> books = bookService.findAll();
 		return new SuccessResponseResult(new GetBooksResponse(books));
 	}
