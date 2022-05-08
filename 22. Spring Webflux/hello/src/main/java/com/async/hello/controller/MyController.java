@@ -1,41 +1,29 @@
 package com.async.hello.controller;
 
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedDeque;
-
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.Netty4ClientHttpRequestFactory;
+import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.AsyncRestTemplate;
 import org.springframework.web.context.request.async.DeferredResult;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @RestController
-@RequiredArgsConstructor
 public class MyController {
 
-	Queue<DeferredResult<String>> results = new ConcurrentLinkedDeque<>();
+	AsyncRestTemplate rt = new AsyncRestTemplate();
 
-	@GetMapping("/dr")
-	public DeferredResult<String> async() {
-		log.debug("dr");
-		DeferredResult<String> deferredResult = new DeferredResult<>();
-		results.add(deferredResult);
-		return deferredResult;
-	}
+	@GetMapping("/rest")
+	public DeferredResult<String> rest(int idx){
+		DeferredResult<String> dr = new DeferredResult<>();
 
-	@GetMapping("/dr/count")
-	public String countDr() {
-		return String.valueOf(results.size());
-	}
-
-	@GetMapping("/dr/event")
-	public String eventDr(String msg) {
-		for (DeferredResult<String> result : results) {
-			result.setResult("Hello" + msg);
-			results.remove(result);
-		}
-		return "OK";
+		ListenableFuture<ResponseEntity<String>> future = rt.getForEntity("http://localhost:8081/service?req={req}",
+			String.class, "hello" + idx);
+		future.addCallback(s ->{
+			dr.setResult(s.getBody() + "/work");
+		}, ex -> {
+			dr.setErrorResult(ex.getMessage());
+		});
+		return dr;
 	}
 }
