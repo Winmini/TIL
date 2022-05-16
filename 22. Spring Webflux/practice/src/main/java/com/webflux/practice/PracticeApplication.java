@@ -19,20 +19,5 @@ public class PracticeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PracticeApplication.class,args);
-		// try (ConfigurableApplicationContext run = SpringApplication.run(PracticeApplication.class, args)) {
-		// }
 	}
-
-	// @Autowired
-	// MyService myService;
-	//
-	// @Bean
-	// ApplicationRunner run() {
-	// 	return args -> {
-	// 		log.info("run()");
-	// 		CompletableFuture<String> hello = myService.hello();
-	// 		log.info("hello.isDone()={}", hello.isDone());
-	// 		log.info("hello.get()={}", hello.get());
-	// 	};
-	// }
 }

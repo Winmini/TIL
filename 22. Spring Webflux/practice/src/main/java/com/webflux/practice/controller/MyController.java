@@ -8,11 +8,13 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import com.webflux.practice.service.MyService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
@@ -20,28 +22,21 @@ import lombok.extern.slf4j.Slf4j;
 public class MyController {
 
 	private final MyService myService;
+	private final WebClient client = WebClient.create();
+	private final String URL = "http://localhost:8081/service?req={req}";
 
-	Queue<DeferredResult<String>> results = new ConcurrentLinkedDeque<>();
-
-	@GetMapping("/dr")
-	public DeferredResult<String> async() {
-		log.debug("dr");
-		DeferredResult<String> deferredResult = new DeferredResult<>();
-		results.add(deferredResult);
-		return deferredResult;
+	@GetMapping("/test")
+	public Mono<String> test() {
+		log.info("start");
+		Mono<String> mono = Mono.just("mono").log();
+		log.info("end");
+		return mono;
 	}
 
-	@GetMapping("/dr/count")
-	public String countDr() {
-		return String.valueOf(results.size());
-	}
-
-	@GetMapping("/dr/event")
-	public String eventDr(String msg) {
-		for (DeferredResult<String> result : results) {
-			result.setResult("Hello" + msg);
-			results.remove(result);
-		}
-		return "OK";
+	@GetMapping("/rest")
+	public Mono<String> async(int idx) {
+		return client.get()
+			.uri(URL, idx)
+			.exchangeToMono(i -> i.bodyToMono(String.class));
 	}
 }
