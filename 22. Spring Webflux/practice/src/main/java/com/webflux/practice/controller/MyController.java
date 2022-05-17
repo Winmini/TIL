@@ -12,8 +12,10 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.webflux.practice.service.MyService;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -26,9 +28,9 @@ public class MyController {
 	private final String URL = "http://localhost:8081/service?req={req}";
 
 	@GetMapping("/test")
-	public Mono<String> test() {
+	public Flux<String> test() {
 		log.info("start");
-		Mono<String> mono = Mono.just("mono").log();
+		Flux<String> mono = Flux.just("1", "2", "3").log();
 		log.info("end");
 		return mono;
 	}
@@ -38,5 +40,11 @@ public class MyController {
 		return client.get()
 			.uri(URL, idx)
 			.exchangeToMono(i -> i.bodyToMono(String.class));
+	}
+
+	@Data
+	static class TestResponse {
+		private Long id;
+		private String value;
 	}
 }
