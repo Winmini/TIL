@@ -117,4 +117,3 @@ public class MemberRepositoryV3 {
 		return con;
 	}
 }
-}
