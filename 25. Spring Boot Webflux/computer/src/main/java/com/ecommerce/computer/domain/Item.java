@@ -1,5 +1,7 @@
 package com.ecommerce.computer.domain;
 
+import java.time.LocalDate;
+
 import org.springframework.data.annotation.Id;
 
 import lombok.AccessLevel;
@@ -15,12 +17,10 @@ public class Item {
 	@Id
 	private String id;
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	private String name;
+	private String description;
 	private double price;
+	private LocalDate releaseDate;
 
 	// private Item(Builder builder){
 	// 	name = builder.name;
