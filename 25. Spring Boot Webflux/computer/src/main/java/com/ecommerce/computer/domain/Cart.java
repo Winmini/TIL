@@ -22,7 +22,6 @@ public class Cart {
 	private String id;
 	private List<CartItem> cartItems = new ArrayList<>();
 
-
 	@Builder
 	public Cart(String id){
 		this.id = id;
