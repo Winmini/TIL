@@ -16,11 +16,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.Tuple;
+import com.querydsl.core.types.Predicate;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import study.querydsl.domain.Member;
+import study.querydsl.domain.MemberDto;
 import study.querydsl.domain.QMember;
+import study.querydsl.domain.QMemberDto;
 import study.querydsl.domain.Team;
 
 @SpringBootTest
@@ -242,6 +247,111 @@ public class QuerydslBasicTest {
 			.select(member.username.concat("_").concat(member.age.stringValue()))
 			.from(member)
 			.fetch();
+	}
+
+	@Test
+	void tupleTest() {
+		List<Tuple> tuples = queryFactory
+			.select(member.username, member.age)
+			.from(member)
+			.fetch();
+
+		for (Tuple tuple : tuples) {
+			String username = tuple.get(member.username);
+			Integer age = tuple.get(member.age);
+		}
+	}
+
+	@Test
+	void setterTest() {
+		List<MemberDto> result = queryFactory
+			.select(Projections.bean(MemberDto.class, member.username, member.age))
+			.from(member)
+			.fetch();
+	}
+
+	@Test
+	void fieldTest() {
+		List<MemberDto> result = queryFactory
+			.select(Projections.fields(MemberDto.class, member.username, member.age))
+			.from(member)
+			.fetch();
+	}
+
+	@Test
+	void constructorTest() {
+		List<MemberDto> result = queryFactory
+			.select(Projections.constructor(MemberDto.class, member.username, member.age))
+			.from(member)
+			.fetch();
+	}
+
+	@Test
+	void annotationTest() {
+		List<MemberDto> result = queryFactory
+			.select(new QMemberDto(member.username, member.age))
+			.from(member)
+			.fetch();
+	}
+
+	@Test
+	void dynamicQuery_BooleanBuilder(){
+		String usernameParam = "member1";
+		Integer ageParam = 10;
+
+		List<Member> result = searchMember1(usernameParam, ageParam);
+	}
+
+	private List<Member> searchMember1(String usernameParam, Integer ageParam) {
+
+		BooleanBuilder builder = new BooleanBuilder();
+		if (usernameParam != null) {
+			builder.and(member.username.eq(usernameParam));
+		}
+
+		if (ageParam != null) {
+			builder.and(member.age.eq(ageParam));
+		}
+
+		return queryFactory
+			.selectFrom(member)
+			.where(builder)
+			.fetch();
+	}
+
+	@Test
+	void dynamicQuery_whereParam() {
+		String usernameParam = "member1";
+		Integer ageParam = 10;
+
+		List<Member> result = searchMember2(usernameParam, ageParam);
+	}
+
+	private List<Member> searchMember2(String usernameParam, Integer ageParam) {
+		return queryFactory
+			.selectFrom(member)
+			.where(usernameEq(usernameParam), ageEq(ageParam))
+			.fetch();
+	}
+
+	private Predicate ageEq(Integer ageParam) {
+		if (ageParam == null){
+			return null;
+		}
+		return member.age.eq(ageParam);
+	}
+
+	private Predicate usernameEq(String usernameParam) {
+		return usernameParam != null ? member.username.eq(usernameParam) : null;
+	}
+	
+	@Test
+	void bulkTest(){
+		long count = queryFactory
+			.update(member)
+			.set(member.username, "비회원")
+			.where(member.age.lt(28))
+			.execute();
 	}
 
 }
