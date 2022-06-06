@@ -6,6 +6,6 @@ spring:
       database: testDB
 
   webflux:
-    hiddenmethod:
+    hidden-method:
       filter:
         enabled: true

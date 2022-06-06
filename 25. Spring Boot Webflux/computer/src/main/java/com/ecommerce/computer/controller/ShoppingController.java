@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.computer.domain.Cart;
-import com.ecommerce.computer.service.CartService;
+import com.ecommerce.computer.service.InventoryService;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
@@ -16,10 +16,10 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class ShoppingController {
 
-	private final CartService cartService;
+	private final InventoryService inventoryService;
 
 	@PostMapping("/add/{id}")
 	public Mono<Cart> addItem(@PathVariable String id) {
-		return cartService.addToCart("Youry Cart", "itemA");
+		return inventoryService.addToCart("Your Cart", "itemA");
 	}
 }

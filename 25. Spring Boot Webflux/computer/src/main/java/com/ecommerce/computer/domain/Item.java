@@ -1,6 +1,7 @@
 package com.ecommerce.computer.domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 
@@ -22,27 +23,16 @@ public class Item {
 	private double price;
 	private LocalDate releaseDate;
 
-	// private Item(Builder builder){
-	// 	name = builder.name;
-	// 	price = builder.price;
-	// }
-	//
-	// static public class Builder {
-	// 	private String name;
-	// 	private double price;
-	//
-	// 	public Builder name(String name){
-	// 		this.name = name;
-	// 		return this;
-	// 	}
-	//
-	// 	public Builder price(double price){
-	// 		this.price = price;
-	// 		return this;
-	// 	}
-	//
-	// 	public Item build(){
-	// 		return new Item(this);
-	// 	}
-	// }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Item item = (Item) o;
+		return id.equals(item.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }

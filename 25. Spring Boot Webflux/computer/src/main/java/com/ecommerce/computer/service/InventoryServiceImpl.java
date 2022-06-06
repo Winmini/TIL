@@ -1,5 +1,6 @@
 package com.ecommerce.computer.service;
 
+import com.ecommerce.computer.domain.Item;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.computer.domain.Cart;
@@ -8,11 +9,12 @@ import com.ecommerce.computer.repository.CartRepository;
 import com.ecommerce.computer.repository.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
 @RequiredArgsConstructor
-public class CartServiceImpl implements CartService {
+public class InventoryServiceImpl implements InventoryService {
 
 	private final CartRepository cartRepository;
 	private final ItemRepository itemRepository;
@@ -34,6 +36,16 @@ public class CartServiceImpl implements CartService {
 					.doOnNext(cartItem -> cart.getCartItems().add(cartItem))
 					.map(cartItem -> cart)))
 			.flatMap(cartRepository::save);
+	}
+
+	@Override
+	public Mono<Cart> getCart(String cartId) {
+		return cartRepository.findById(cartId);
+	}
+
+	@Override
+	public Flux<Item> getInventory() {
+		return itemRepository.findAll();
 	}
 
 }
