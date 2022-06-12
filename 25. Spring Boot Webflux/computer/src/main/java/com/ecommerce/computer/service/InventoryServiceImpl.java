@@ -1,12 +1,13 @@
 package com.ecommerce.computer.service;
 
 import com.ecommerce.computer.domain.Item;
+import com.ecommerce.computer.repository.item.SearchParameter;
 import org.springframework.stereotype.Service;
 
 import com.ecommerce.computer.domain.Cart;
 import com.ecommerce.computer.domain.CartItem;
 import com.ecommerce.computer.repository.CartRepository;
-import com.ecommerce.computer.repository.ItemRepository;
+import com.ecommerce.computer.repository.item.ItemRepository;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
@@ -18,6 +19,7 @@ public class InventoryServiceImpl implements InventoryService {
 
 	private final CartRepository cartRepository;
 	private final ItemRepository itemRepository;
+
 
 	@Override
 	public Mono<Cart> addToCart(String cartId, String itemName) {
@@ -44,7 +46,7 @@ public class InventoryServiceImpl implements InventoryService {
 	}
 
 	@Override
-	public Flux<Item> getInventory() {
+	public Flux<Item> getInventory(SearchParameter searchParameter) {
 		return itemRepository.findAll();
 	}
 

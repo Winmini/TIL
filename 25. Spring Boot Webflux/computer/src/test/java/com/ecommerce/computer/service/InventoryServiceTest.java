@@ -4,11 +4,7 @@ import com.ecommerce.computer.domain.Cart;
 import com.ecommerce.computer.domain.CartItem;
 import com.ecommerce.computer.domain.Item;
 import com.ecommerce.computer.repository.CartRepository;
-import com.ecommerce.computer.repository.ItemRepository;
-import com.ecommerce.computer.service.InventoryService;
-import com.ecommerce.computer.service.InventoryServiceImpl;
-import org.assertj.core.api.Assertions;
-import org.hamcrest.Condition;
+import com.ecommerce.computer.repository.item.ItemRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,6 +27,8 @@ public class InventoryServiceTest {
     private CartRepository cartRepository;
 
     private InventoryService inventoryService;
+
+
 
     @BeforeEach
     void setUp() {

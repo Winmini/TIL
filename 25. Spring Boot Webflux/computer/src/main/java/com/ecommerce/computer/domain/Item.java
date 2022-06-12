@@ -1,8 +1,10 @@
 package com.ecommerce.computer.domain;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 
 import lombok.AccessLevel;
@@ -10,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Getter
 @Builder
@@ -22,6 +25,12 @@ public class Item {
 	private String description;
 	private double price;
 	private LocalDate releaseDate;
+
+	@CreatedDate
+	private final LocalDateTime createdTime;
+
+	@LastModifiedDate
+	private final LocalDateTime updatedTime;
 
 	@Override
 	public boolean equals(Object o) {

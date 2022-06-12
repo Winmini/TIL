@@ -1,9 +1,6 @@
 package com.ecommerce.computer.controller;
 
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ecommerce.computer.domain.Cart;
 import com.ecommerce.computer.service.InventoryService;

@@ -1,4 +1,4 @@
-package com.ecommerce.computer.repository;
+package com.ecommerce.computer.repository.item;
 
 import org.springframework.data.domain.Example;
 import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;
@@ -17,4 +17,5 @@ public interface ItemRepository extends ReactiveCrudRepository<Item, String>, Re
 	Flux<Item> findByNameContaining(String partialName);
 
 	<T extends Item> Mono<T> findOne(Example<T> var1);
+
 }
