@@ -13,6 +13,9 @@ public class AspectV1 {
 	@Around("execution(* hello.aop.order..*(..))")
 	public Object doLog(ProceedingJoinPoint joinPoint) throws Throwable{
 		log.info("[log] {}", joinPoint.getSignature());
+		log.info("[log] {}", joinPoint.getSignature().getName());
+		log.info("[log] {}", joinPoint.getSignature().toShortString());
+		log.info("[log] {}", joinPoint.getSignature().toLongString());
 		return joinPoint.proceed();
 	}
 }

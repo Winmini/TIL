@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootTest
-@Import({AspectV5.LogAspect.class, AspectV5.TxAspect.class})
+@Import(AspectV1.class)
 public class AopTest {
 
 	@Autowired
